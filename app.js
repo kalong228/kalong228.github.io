@@ -4,11 +4,24 @@
 // See HW4 writeup for more hints and details.
 class App {
   constructor() {
-    const menuElement = document.querySelector('#menu');
-    this.menu = new MenuScreen(menuElement);
+      this.Submit=this.Submit.bind(this);
 
-    const musicElement = document.querySelector('#music');
-    this.music = new MusicScreen(musicElement);
+
+      var menuElement = document.querySelector('#menu');
+      menuElement.addEventListener('submit',this.Submit);
+
+
+      var musicElement=document.querySelector('#main');
+
+
+      this.MenuScreen = new MenuScreen(menuElement);
+      this.MusicScreen = new MusicScreen(musicElement);
+      this.MusicScreen.hide();
   }
-
+    Submit(event)
+    {
+        event.preventDefault();
+        this.MenuScreen.hide();
+        this.MusicScreen.show();
+    }
 }

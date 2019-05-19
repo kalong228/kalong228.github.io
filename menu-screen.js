@@ -1,37 +1,45 @@
-// This class will represent the menu screen that you see when you first load
-// the music visualizer.
-//
-// See HW4 writeup for more hints and details.
-var s = document.getElementById('song-selector');
-var t = document.getElementById('query-input');
-var e = document.getElementById('error');
-var theme = ['candy', 'charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
 class MenuScreen {
   constructor(containerElement) {
     this.containerElement = containerElement;
+    function onJsonReady(json) {
+      //   console.log(json);
+      const albums = json;
+      const themeList = ['candy', 'charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
+      const SongList = albums;
+      const select = document.querySelector('#song-selector');
+      const input = document.querySelector('#query-input');
+      var random = getRandomInt(themeList.length);
 
-    // song
+      input.setAttribute("value", themeList[random]);
+
+      for (let i of Object.keys(SongList)) {
+        console.log(i);
+        select.append(new Option(SongList[i].title, SongList[i].songUrl));
+      }
+    }
+
+    function onResponse(response) {
+      return response.json();
+    }
     fetch('https://fullstackccu.github.io/homeworks/hw4/songs.json')
+    //fetch("https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=10")
       .then(onResponse)
-      .then(onDataReady);
-
-    //theme
-    
-    t.value = theme[Math.floor(Math.random()*10)];
-
-    //submit
-    this.goBtn = document.getElementById("go");
-    this.goBtn = addEventListener('submit',this.onClick);
+      .then(onJsonReady);
   }
-  onClick(event){
-    event.preventDefault();
-    url = "https://api.giphy.com/v1/gifs/search?q="+ t.value +"&api_key=VZ7FFJUrfrJrkWSEGvKsVtBp6wNRiyxZ";
-    app.music.gif.fetch_gif(url);
-  }
-  show(){
+ 
+
+  show() {
     this.containerElement.classList.remove('inactive');
   }
+
   hide() {
     this.containerElement.classList.add('inactive');
   }
+
 }
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+
