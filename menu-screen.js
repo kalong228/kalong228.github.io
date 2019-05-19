@@ -1,45 +1,77 @@
+// This class will represent the menu screen that you see when you first load
+// the music visualizer.
+//
+// See HW4 writeup for more hints and details.
 class MenuScreen {
-  constructor(containerElement) {
-    this.containerElement = containerElement;
-    function onJsonReady(json) {
-      //   console.log(json);
-      const albums = json;
-      const themeList = ['candy', 'charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
-      const SongList = albums;
-      const select = document.querySelector('#song-selector');
-      const input = document.querySelector('#query-input');
-      var random = getRandomInt(themeList.length);
+  constructor() {
+    // TODO(you): Implement the constructor and add fields as necessary.
+    this._onJsonReady = this._onJsonReady.bind(this);
+    this.createOption = this.createOption.bind(this);
+    this.hide = this.hide.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
 
-      input.setAttribute("value", themeList[random]);
+    this.audioInfo = new Array();
+    var words = ['candy', 'charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
+    this.inputValue = document.querySelector('#query-input');
+    console.log(this.inputValue);
+    this.inputValue.value = words[Math.floor(Math.random()*words.length)];
+    console.log(words);
+    const form = document.querySelector('form');
+    form.addEventListener('submit', this._onSubmit);
+}
+_onSubmit(){
 
-      for (let i of Object.keys(SongList)) {
-        console.log(i);
-        select.append(new Option(SongList[i].title, SongList[i].songUrl));
-      }
+  const chooseValue = document.querySelector('#song-selector').value;
+  console.log(chooseValue);
+  console.log(this.inputValue.value);
+  this.hide();
+  const audioScreenElement = document.querySelector('#audio-screen');
+  audioScreenElement.style.display = 'flex';
+  const gifElement = new GifDisplay(this.inputValue.value);
+  event.preventDefault();
+  gifElement.loadgif();
+  const musicElement = new MusicScreen(gifElement);
+  /*use choose(title) to got the url from audioInfo(JSON)*/
+  for (const info in this.audioInfo) {
+    console.log(this.audioInfo[info].title);
+    if(JSON.stringify(this.audioInfo[info].title) == chooseValue){
+      console.log(this.audioInfo[info].songUrl);
+      musicElement.playAudio(this.audioInfo[info].songUrl);
     }
-
-    function onResponse(response) {
-      return response.json();
-    }
-    fetch('https://fullstackccu.github.io/homeworks/hw4/songs.json')
-    //fetch("https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=10")
-      .then(onResponse)
-      .then(onJsonReady);
   }
- 
-
-  show() {
-    this.containerElement.classList.remove('inactive');
+}
+createOption(selectContainer,audioTitle){
+    const newOption = document.createElement('option');
+    console.log(newOption);
+    newOption.innerHTML = JSON.stringify(audioTitle);
+    return newOption;
   }
-
-  hide() {
-    this.containerElement.classList.add('inactive');
+_renderAudios() {
+  const selectContainer = document.querySelector('#song-selector');
+  for (const info in this.audioInfo) {
+    const audio = this.createOption(selectContainer,this.audioInfo[info].title);
+    selectContainer.appendChild(audio);
   }
+}
+loadAudios() {
+   fetch('https://fullstackccu.github.io/homeworks/hw4/songs.json')
+       .then(this._onResponse)
+       .then(this._onJsonReady);
+ }
 
+ _onJsonReady(json) {
+   this.audioInfo = json;
+   console.log(this.audioInfo);
+   this._renderAudios();
+ }
+
+  _onResponse(response) {
+   return response.json();
+}
+hide(){
+  const menuElement = document.querySelector('#menu');
+  menuElement.style.display = 'none';
+  console.log(menuElement.style.display);
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
 }
-
-

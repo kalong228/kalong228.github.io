@@ -4,24 +4,9 @@
 // See HW4 writeup for more hints and details.
 class App {
   constructor() {
-      this.Submit=this.Submit.bind(this);
-
-
-      var menuElement = document.querySelector('#menu');
-      menuElement.addEventListener('submit',this.Submit);
-
-
-      var musicElement=document.querySelector('#main');
-
-
-      this.MenuScreen = new MenuScreen(menuElement);
-      this.MusicScreen = new MusicScreen(musicElement);
-      this.MusicScreen.hide();
+    // TODO(you): Implement the constructor and add fields as necessary.
+    var menuscreen = new MenuScreen();
+    menuscreen.loadAudios();
   }
-    Submit(event)
-    {
-        event.preventDefault();
-        this.MenuScreen.hide();
-        this.MusicScreen.show();
-    }
+
 }

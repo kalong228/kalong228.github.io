@@ -8,80 +8,39 @@
 //
 // See HW4 writeup for more hints and details.
 class MusicScreen {
-  constructor(containerElement) {
-    this.containerElement = containerElement;
-
-    this.url = "";
-    this.songName = "";
-
-    this.isPlaying = 0;
-    this._onKick = this._onKick.bind(this);
-
-
-    const button = document.querySelector('#button');
-    button.style.zIndex="500";
-    this.onClick = this.onClick.bind(this);
-
-
-    let img = document.createElement("img");
-    img.setAttribute("id", "playButton");
-    img.src = "./images/play.png"
-    button.append(img);
-    img.style.width = "60px";
-    img.style.height = "60px";
-    img.addEventListener('click', this.onClick);
-
-  }
-
-  show() {
-    console.log("mu");
+  constructor(gifElement) {
     this.audioPlayer = new AudioPlayer();
-    this.containerElement.classList.remove('inactive');
-    let choice=document.querySelectorAll('option');
-    let gif=document.querySelector('input');
-    var music;
-    for(var i of choice)
-        if(i.selected)
-            music=i;
-    console.log(gif.value);
-    this.url=music.value;
-    this.songName=music.textContent;
-    this.GIF = new GifDisplay(gif.value);
-    
-  //  this.Buutton = new PlayButton(this.url,this.songName);
-    console.log(music.value);
-    console.log(music.textContent);
-    console.log(event);
-  }
+    this.playAudio = this.playAudio.bind(this);
+    this._onKick = this._onKick.bind(this);
+    this.clickbuttom = this.clickbuttom.bind(this);
+    this.gifElement = gifElement;
+    this.kicknum = 1;
 
-  hide() {
-    this.containerElement.classList.add('inactive');
+    this.pauseElement = document.querySelector(".imgDiv");
+    this.pauseElement.addEventListener('click',this.clickbuttom);
+    // TODO(you): Implement the constructor and add fields as necessary.
   }
-
-  onClick(event) {
-    if (this.isPlaying == 0) {
-      console.log("hi");
-      this.audioPlayer.setSong(this.url);
-      console.log("+++"+this.url);
-      this.audioPlayer.setKickCallback(this._onKick);
-      this.audioPlayer.play();
-      this.isPlaying = 1;
-      let button = document.querySelector('#playButton');
-      button.setAttribute("src","./images/pause.png");
-    }
-    else{
-      this.audioPlayer.pause();
-      this.isPlaying = 0;
-      let button = document.querySelector('#playButton');
-      button.setAttribute("src","./images/play.png");
-    }
+  playAudio(songUrl){
+    this.audioPlayer.setSong(songUrl);
+    this.audioPlayer.setKickCallback(this._onKick);
+    this.audioPlayer.play();
   }
   _onKick() {
-    console.log('kick!');
-    this.GIF.change();
-    console.log('kick2');
-  }
-}
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+   console.log('kick!');
+   this.gifElement.nextgif(this.kicknum);
+   this.kicknum = this.kicknum + 1;
+   if(this.kicknum>=25) this.kicknum = 0;
+ }
+ clickbuttom(event){
+    console.log(event.target);
+    if(event.target.getAttribute('src') == './images/pause.png'){
+      this.audioPlayer.pause();
+      event.target.src = './images/play.png';
+    }
+    else{
+      this.audioPlayer.play();
+      event.target.src = './images/pause.png';
+    }
+ }
+  // TODO(you): Add methods as necessary.
 }
