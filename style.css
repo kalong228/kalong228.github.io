@@ -1,89 +1,160 @@
 /**
  * This style is provided by the course staff. Please do not modify this file!
- * Please add your additional stying to  `musicbox-style.css` instead.
- **/
-
+ * If you need to add additional CSS styling, please change
+ * `flashcard-style.css` instead.
+ */
 body {
+  background-color: #d0e6df;
+  color: #777e8c;
   font-family: 'Open Sans', sans-serif;
-  margin: 0;
-}
+  user-select: none;
+  -webkit-user-select: none;
 
-#menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#menu {
+#choices div {
+  display: flex;
+  align-items: center;
+}
+
+#choices div, .menu-buttons button {
+  background-color: #fafafa;
+  border: none;
+  border-bottom: 2px solid #d2d2d2;
+  box-sizing: border-box;
   font-size: 1.5em;
+  height: 2.5em;
+  margin: 0.5em 0;
+  padding-left: 0.75em;
+  width: 100%;
+}
+
+.menu-buttons button {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.25em;
   text-align: center;
 }
 
-#menu fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  width: 90%;
-  max-width: 700px;
-}
-
-#menu h1 {
-  margin: 0;
-}
-
-#menu h2 {
-  font-size: 1.25em;
-  font-weight: normal;
-  margin: 0.5em 0;
-}
-
-#menu input[type=submit] {
-  margin-top: 1em;
-}
-
-#menu input, #menu select {
-  border: 0;
+.flashcard {
+  background: #66ccff;
+  border-radius: 10px;
+  box-shadow: 0 8px #00aaff;
   box-sizing: border-box;
-  font-size: 24px;
-  height: 2em;
+  font-size: 2.5em;
+  color: white;
+  overflow: hidden;
+  margin-bottom: 8px;
+  padding: 5px;
+  user-select: none;
+  -webkit-user-select: none;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-#menu input[type=text], #menu select {
-  width: 100%;
+.flashcard-box {
+  padding: 25px;
+  position: relative;
+  height: 300px;
+  width: 275px;
+  box-sizing: border-box;
+  touch-action: none;
+  overflow: hidden;
 }
 
-#menu input:focus, #menu select:focus {
-  outline: none;
+.flashcard.definition {
+  background: white;
+  box-shadow: 0 8px #ffcc66;
+  color: black;
+  z-index: 2;
 }
 
-#menu input[type=submit] {
-  background-color: #e0e0e0;
-  border: 0;
-  width: 100%;
-  max-width: 180px;
+.flashcard-box.show-word .definition {
+  display: none;
 }
 
-#menu input[type=text]:focus {
-  border-bottom: 2px solid black;
-}
-
-#menu input[type=text] {
-  background-color: white;
-  border-bottom: 2px solid #e2e2e2;
-}
-
-#menu select {
-  background-color: #ddfff8;
-}
-
-#menu .submit-button {
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
   text-align: center;
 }
 
 .inactive {
   display: none !important;
+}
+
+#main {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+#main .status {
+  background-color: #b6d9d9;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #607d8b;
+  margin-top: 1em;
+  padding: 0.5em;
+  width: 275px;
+}
+
+#menu {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+#menu .contents, #results {
+  background-color: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: auto;
+  max-width: 600px;
+  width: 95vw;
+}
+
+#menu .contents header {
+  margin: 1em 0;
+}
+
+#menu .contents header h1 {
+  font-size: 2.5em;
+}
+
+#menu .contents header h2 {
+  font-weight: normal;
+}
+
+#results {
+  font-size: 1.25em;
+  max-width: 400px;
+  padding: 0.5em;
+  text-align: center;
+}
+
+#results .percent {
+  font-weight: bold;
+  font-size: 3em;
 }
