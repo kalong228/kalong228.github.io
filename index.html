@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="musicbox-style.css"/>
     <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-    <!--<script src="./lib/dancer.min.js"></script>-->
-    <script src="./lib/dancer.js"></script>
+ <!--   <script src="./lib/dancer.min.js"></script> -->
     <script src="./lib/fetch.js"></script>
     <script src="audio-player.js" defer></script>
 
     <!-- TODO(you): Add any additional scripts here! -->
+    <script src="dancer.js" defer></script>
     <script src="menu-screen.js" defer></script>
     <script src="play-button.js" defer></script>
     <script src="gif-display.js" defer></script>
@@ -23,7 +23,6 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-
     <div id="menu">
       <h1>Music Box</h1>
       <fieldset>
@@ -32,18 +31,20 @@
           <select id="song-selector"></select>
 
           <h2>2. Choose a theme:</h2>
-          <input type="text" id="query-input" placeholder="Enter a word or phrase" value=""/>
+          <input type="text" id="query-input" placeholder="Enter a word or phrase" />
           <div id="error" class="inactive">Not enough gifs for this theme. Please try another.</div>
 
-          <input type="submit" value="Go" />
+          <input type="submit" value="Go" id="go"/>
         </form>
       </fieldset>
     </div>
-
-    <div id="audio-screen">
-      <div id = "music_screen"></div>
-      <img class="imgDiv" src = './images/pause.png'/>
+    <!-- TODO(you): Add the HTML necessary to complete the assignment! -->
+    <div id="music" class="inactive">
+      <div id="bar">
+        <input type="button" id="play">
+      </div>
     </div>
-
+    <div id="background" class="inactive">
+    </div>
   </body>
 </html>

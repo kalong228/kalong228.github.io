@@ -8,39 +8,20 @@
 //
 // See HW4 writeup for more hints and details.
 class MusicScreen {
-  constructor(gifElement) {
-    this.audioPlayer = new AudioPlayer();
-    this.playAudio = this.playAudio.bind(this);
-    this._onKick = this._onKick.bind(this);
-    this.clickbuttom = this.clickbuttom.bind(this);
-    this.gifElement = gifElement;
-    this.kicknum = 1;
-
-    this.pauseElement = document.querySelector(".imgDiv");
-    this.pauseElement.addEventListener('click',this.clickbuttom);
-    // TODO(you): Implement the constructor and add fields as necessary.
+  constructor(containerElement) {
+    this.containerElement = containerElement;
+    this.audio = new AudioPlayer();
+    this.gif = new GifDisplay();
+    this.show = this.show.bind(this);
   }
-  playAudio(songUrl){
-    this.audioPlayer.setSong(songUrl);
-    this.audioPlayer.setKickCallback(this._onKick);
-    this.audioPlayer.play();
+  show(){
+    this.containerElement.classList.remove('inactive');
+    document.getElementById('background').classList.remove('inactive');
+    this.playbtn = new PlayButton(); 
+    this.audio.setSong(songURL[s.selectedIndex]);
+    this.audio.play();
   }
-  _onKick() {
-   console.log('kick!');
-   this.gifElement.nextgif(this.kicknum);
-   this.kicknum = this.kicknum + 1;
-   if(this.kicknum>=25) this.kicknum = 0;
- }
- clickbuttom(event){
-    console.log(event.target);
-    if(event.target.getAttribute('src') == './images/pause.png'){
-      this.audioPlayer.pause();
-      event.target.src = './images/play.png';
-    }
-    else{
-      this.audioPlayer.play();
-      event.target.src = './images/pause.png';
-    }
- }
-  // TODO(you): Add methods as necessary.
+  hide() {
+    this.containerElement.classList.add('inactive');
+  }
 }

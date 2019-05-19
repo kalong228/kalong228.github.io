@@ -4,9 +4,11 @@
 // See HW4 writeup for more hints and details.
 class App {
   constructor() {
-    // TODO(you): Implement the constructor and add fields as necessary.
-    var menuscreen = new MenuScreen();
-    menuscreen.loadAudios();
+    const menuElement = document.querySelector('#menu');
+    this.menu = new MenuScreen(menuElement);
+
+    const musicElement = document.querySelector('#music');
+    this.music = new MusicScreen(musicElement);
   }
 
 }
