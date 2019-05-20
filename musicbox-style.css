@@ -1,27 +1,27 @@
 /*
 TODO(you): Write any additional styles you need here.
 */
-#music{
-    background-size: cover;
-    background-position: center center;
+#screen
+{
+	background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     height:100%;
     width:100%;
     position: absolute;
-    z-index:2;
 }
 #background {
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
     height:100%;
     width:100%;
     position: absolute;
-    z-index:1;
     bottom:70px;
 }
-#bar{
-    display: flex;
+#play_bar
+{
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: absolute;
@@ -30,8 +30,10 @@ TODO(you): Write any additional styles you need here.
 	width: 100%;
 	bottom: 0px;
 }
-#play{
-    background: url(images/pause.png);
+
+#play_button
+{
+	background: url(images/pause.png);
     background-size:cover;
     border-style:none;
     height:60px;
