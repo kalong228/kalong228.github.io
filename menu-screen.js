@@ -32,3 +32,4 @@ class MenuScreen {
     this.Element.classList.add('inactive');
   }
 }
+

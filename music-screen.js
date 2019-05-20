@@ -25,3 +25,4 @@ class MusicScreen {
     this.Element.classList.add('inactive');
   }
 }
+
