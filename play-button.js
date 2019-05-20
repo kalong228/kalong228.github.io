@@ -15,12 +15,12 @@ class PlayButton {
     if(this.count%2==0){
       document.getElementById("play_button").style.backgroundImage = "url(images/pause.png)";
       this.playing = true;
-      app.music.audio.play();
+      app.screen.audio.play();
     }
     else{
       document.getElementById("play_button").style.backgroundImage = "url(images/play.png)";
       this.playing = false;
-      app.music.audio.pause();
+      app.screen.audio.pause();
     }
   }
 }
